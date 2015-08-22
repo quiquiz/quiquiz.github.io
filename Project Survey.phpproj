@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Name>Project_Survey</Name>
+    <ProjectGuid>e5084249-483b-4800-9b89-3c9526bb9829</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Project_Survey</RootNamespace>
+    <ProjectTypeGuids>{A0786B88-2ADB-4C21-ABE8-AA2D79766269}</ProjectTypeGuids>
+    <AssemblyName>Project Survey</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <IncludeDebugInformation>true</IncludeDebugInformation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <IncludeDebugInformation>false</IncludeDebugInformation>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="index.php" />
+    <Compile Include="processNewData.php" />
+    <Compile Include="new.php" />
+    <Compile Include="quiz.php" />
+    <Compile Include="cookie.php" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="css\" />
+    <Folder Include="css\generic\" />
+    <Folder Include="js\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\generic\buttons.scss" />
+    <Content Include="css\generic\text.scss" />
+    <Content Include="css\index.scss" />
+    <Content Include="css\normalize.css" />
+    <Content Include="js\quiz.js" />
+  </ItemGroup>
+</Project>
