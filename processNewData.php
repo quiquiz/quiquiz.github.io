@@ -1,7 +1,9 @@
 <?php
 session_start();
+$errorstr = "";
 if( isset($_GET['qid']) && isset($_GET['res']) )
-{
+{	
+	
     $URLcode = $_GET['qid'];
     $quizResults = $_GET['res'];
 
@@ -13,10 +15,11 @@ if( isset($_GET['qid']) && isset($_GET['res']) )
     $dbpass = "quiquizletmein";
     $dbname = "quiquiz";
     $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-
+    
     if(mysqli_connect_errno())
     {
         die("db conn failed: " . mysqli_connect_error() . "(" . mysqli_connect_errno() . ")");
+        $errorstr .= "Could not connect to database. <br/>";
     }
 
     $query  = "SELECT * FROM quizzes WHERE url_code = '{$URLcode}';";
@@ -26,6 +29,15 @@ if( isset($_GET['qid']) && isset($_GET['res']) )
     {
         //good to go
         $quiz = $result->fetch_assoc();
+    }
+    else
+    {
+    	$errorstr .= "Incorrect number of rows affected. <br/>";
+    }
+    
+    if(!$quiz)
+    {
+    	$errorstr .= "Associative array was not populated. <br/>";
     }
 
     $currentResults = $quiz['results'];
@@ -60,12 +72,22 @@ if( isset($_GET['qid']) && isset($_GET['res']) )
 
     $query = "UPDATE quizzes SET results = ? WHERE url_code = ?";
     $statement = $conn->prepare($query);
+    if($conn->error){ $errorstr .= $conn->error . "<br/>";}
     $statement->bind_param("ss", $finalResultsStr, $URLcode);
+    if($conn->error){ $errorstr .= $conn->error . "<br/>";}
     $statement->execute();
+    if($conn->error){ $errorstr .= $conn->error . "<br/>";}
     $statement->close();
     $conn->close();
 
-    echo "success";
+    if($errorstr == "")
+    {
+    	echo "success";
+    }
+    else
+    {
+    	echo $errorstr;
+    }
 }
 else
 {

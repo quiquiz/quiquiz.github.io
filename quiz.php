@@ -77,7 +77,6 @@
 <head>
     <title><?php echo $question; ?></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/buttons.min.css">    
 </head>
 <body>
 
@@ -183,7 +182,7 @@
             url: ajaxURL,
             type: 'post',
             success: function (data) {
-                console.log("ajax success.");
+                console.log(data);
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.log(xhr);
