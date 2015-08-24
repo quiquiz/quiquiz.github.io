@@ -1,7 +1,8 @@
 <?php
+    require("error.php");
+    $errors = array();
     error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
     session_start(); //start session so I can use $_SESSION
-
     //function written by Stephen Watkins, obtained from:        www.stackoverflow.com/questions/4356289/php-random-string-generator
     function generateRandomString($length) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -17,9 +18,7 @@
 
     //generate a link code for this quiz
     $quizURLcode = generateRandomString(10); //don't bother with the .php
-
     $answersArray = array();
-
     for($i = 0; $i < 8; $i++)
     {
         $idx = $i + 1;
@@ -37,51 +36,50 @@
             array_push($answersArray, " ");
         }
     }
-
     //default all other required values
     $question = isset($_POST['question']) ? $_POST['question'] : " ";
     $multiple = isset($_POST['checkVSradio']) ? $_POST['checkVSradio'] : " ";
     $ip_restrict = isset($_POST['restrict_ip']) ? $_POST['restrict_ip'] : " ";
     $results = "0,0,0,0,0,0,0,0";
     $iplist = "0.0.0.0";
-
     //little bit of data reformatting for the database
     $multiple = $multiple == "on" ? "y" : "n";
     $ip_restrict = $ip_restrict == "on" ? "n" : "y";
-
-    if($question != null && $answersArray[0] != null && $answersArray[1] != null && $question != " " && $ans1 != " " && $ans2 != " ")
+    if($question != null && $answersArray[0] != null && $answersArray[1] != null && $question != " ")
     {
         $_SESSION['created'] = true;
     }
-
     if(isset($_SESSION['created']) && $_SESSION['created'] == true)
     {
         //reset so that if they go to make ANOTHER new quiz, the session variable won't block them from doing so
         $_SESSION['created'] = false;
-
         ///////////////////////////////////////////
         //create our new table entry 
-
         //connect
         $dbhost = "localhost";
         $dbuser = "quiquiz_manager";
         $dbpass = "quiquizletmein";
         $dbname = "quiquiz";
         $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-
         //verify connect success
-        if(mysqli_connect_errno()){die("db conn failed: " . mysqli_connect_error() . "(" . mysqli_connect_errno() . ")");}
+        if(!$conn){ reportError("Unable to establish a connection to the database.  Check with the administrator if this problem persists.", $errors); }
+        else{
+            //build query string
+            $query  = "INSERT INTO quizzes (question, answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8, results, url_code, multiple, ip_restrict, ip_list) ";
+            $query .= "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+            //prepare and execute query
+            $statement = $conn->prepare($query);
+            if($conn->error){ reportError($conn->error, $errors); }
+            $statement->bind_param("ssssssssssssss", $question, $answersArray[0], $answersArray[1], $answersArray[2], $answersArray[3], $answersArray[4], $answersArray[5], $answersArray[6], $answersArray[7], $results, $quizURLcode, $multiple, $ip_restrict, $iplist);
+            if($conn->error){ reportError($conn->error, $errors); }
+            $statement->execute();
+            if($conn->error){ reportError($conn->error, $errors); }
+            $statement->close();
+            $conn->close();
+        }
 
-        //build query string
-        $query  = "INSERT INTO quizzes (question, answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8, results, url_code, multiple, ip_restrict, ip_list) ";
-        $query .= "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
-
-        //prepare and execute query
-        $statement = $conn->prepare($query);
-        $statement->bind_param("ssssssssssssss", $question, $answersArray[0], $answersArray[1], $answersArray[2], $answersArray[3], $answersArray[4], $answersArray[5], $answersArray[6], $answersArray[7], $results, $quizURLcode, $multiple, $ip_restrict, $iplist);
-        $statement->execute();
-        $statement->close();
-        $conn->close();
+        //stop execution if any page errors occurred
+        verifyNoErrors($errors);
         
         //redirect to this page, but now with a urlcode url parameter
         header("Location: quiz.php?qid=" . $quizURLcode);
@@ -122,7 +120,6 @@
 
 
     <script>
-
         function showAllAnswers()
         {
             $(".textboxContainer").append("<input type='text' name='ans5text' placeholder='Answer 5...' value=''/><br />");
@@ -131,7 +128,6 @@
             $(".textboxContainer").append("<input type='text' name='ans8text' placeholder='Answer 8...' value=''/><br />");
             $("#moreAnswersButton").remove();
         }
-
     </script>
 </body>
 </html>

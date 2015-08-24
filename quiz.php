@@ -81,20 +81,20 @@
 </head>
 <body>
 
-    <h3><?php echo $question; ?></h3></br>
+    <h3><?php echo $question; ?></h3><br/>
 
     <div class="contentWrapper">
 
         <div class="quiz">
         
-            <div <?php if($answerVisible[0] == 0){echo "class='deleteme'";} ?> ><input id="sel1" type="<?php if($multiple == 'y'){echo "checkbox";}else{echo "radio";} ?>" name="tick" value="1"/> <?php if($answerVisible[0] == 1){echo $answers[0];} ?><br /></div>
-            <div <?php if($answerVisible[1] == 0){echo "class='deleteme'";} ?> ><input id="sel2" type="<?php if($multiple == 'y'){echo "checkbox";}else{echo "radio";} ?>" name="tick" value="2"/> <?php if($answerVisible[1] == 1){echo $answers[1];} ?><br /></div>
-            <div <?php if($answerVisible[2] == 0){echo "class='deleteme'";} ?> ><input id="sel3" type="<?php if($multiple == 'y'){echo "checkbox";}else{echo "radio";} ?>" name="tick" value="3"/> <?php if($answerVisible[2] == 1){echo $answers[2];} ?><br /></div>
-            <div <?php if($answerVisible[3] == 0){echo "class='deleteme'";} ?> ><input id="sel4" type="<?php if($multiple == 'y'){echo "checkbox";}else{echo "radio";} ?>" name="tick" value="4"/> <?php if($answerVisible[3] == 1){echo $answers[3];} ?><br /></div>
-            <div <?php if($answerVisible[4] == 0){echo "class='deleteme'";} ?> ><input id="sel5" type="<?php if($multiple == 'y'){echo "checkbox";}else{echo "radio";} ?>" name="tick" value="5"/> <?php if($answerVisible[4] == 1){echo $answers[4];} ?><br /></div>
-            <div <?php if($answerVisible[5] == 0){echo "class='deleteme'";} ?> ><input id="sel6" type="<?php if($multiple == 'y'){echo "checkbox";}else{echo "radio";} ?>" name="tick" value="6"/> <?php if($answerVisible[5] == 1){echo $answers[5];} ?><br /></div>
-            <div <?php if($answerVisible[6] == 0){echo "class='deleteme'";} ?> ><input id="sel7" type="<?php if($multiple == 'y'){echo "checkbox";}else{echo "radio";} ?>" name="tick" value="7"/> <?php if($answerVisible[6] == 1){echo $answers[6];} ?><br /></div>
-            <div <?php if($answerVisible[7] == 0){echo "class='deleteme'";} ?> ><input id="sel8" type="<?php if($multiple == 'y'){echo "checkbox";}else{echo "radio";} ?>" name="tick" value="8"/> <?php if($answerVisible[7] == 1){echo $answers[7];} ?><br /></div>
+            <div <?php if($answerVisible[0] == 0){echo "class='deleteme'";} ?> ><input id="sel1" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="1"/> <?php if($answerVisible[0] == 1){echo $answers[0];} ?><br /></div>
+            <div <?php if($answerVisible[1] == 0){echo "class='deleteme'";} ?> ><input id="sel2" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="2"/> <?php if($answerVisible[1] == 1){echo $answers[1];} ?><br /></div>
+            <div <?php if($answerVisible[2] == 0){echo "class='deleteme'";} ?> ><input id="sel3" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="3"/> <?php if($answerVisible[2] == 1){echo $answers[2];} ?><br /></div>
+            <div <?php if($answerVisible[3] == 0){echo "class='deleteme'";} ?> ><input id="sel4" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="4"/> <?php if($answerVisible[3] == 1){echo $answers[3];} ?><br /></div>
+            <div <?php if($answerVisible[4] == 0){echo "class='deleteme'";} ?> ><input id="sel5" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="5"/> <?php if($answerVisible[4] == 1){echo $answers[4];} ?><br /></div>
+            <div <?php if($answerVisible[5] == 0){echo "class='deleteme'";} ?> ><input id="sel6" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="6"/> <?php if($answerVisible[5] == 1){echo $answers[5];} ?><br /></div>
+            <div <?php if($answerVisible[6] == 0){echo "class='deleteme'";} ?> ><input id="sel7" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="7"/> <?php if($answerVisible[6] == 1){echo $answers[6];} ?><br /></div>
+            <div <?php if($answerVisible[7] == 0){echo "class='deleteme'";} ?> ><input id="sel8" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="8"/> <?php if($answerVisible[7] == 1){echo $answers[7];} ?><br /></div>
             <button class="submitQuizResults" onclick="processQuizResults()">Submit</button><br />
 
         </div>
@@ -173,16 +173,22 @@
         }
 
         var URLcode = '<?php echo $URLcode; ?>';
-        var ajaxURL = "/processNewData.php?qid=" + URLcode + "&res=";
+        var ajaxURL = "processNewData.php?qid=" + URLcode + "&res=";
         for (var i = 0; i < 8; i++)
         {
             ajaxURL += selections[i];
         }
+
         $.ajax({
             url: ajaxURL,
             type: 'post',
             success: function (data) {
-                console.log("Response from " + ajaxURL + ":  " + data);
+                console.log("ajax success.");
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log(xhr);
+                console.log(textStatus);
+                console.log(errorThrown);
             }
         });
 

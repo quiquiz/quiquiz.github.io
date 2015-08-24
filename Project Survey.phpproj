@@ -16,6 +16,7 @@
     <IncludeDebugInformation>false</IncludeDebugInformation>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="error.php" />
     <Compile Include="index.php" />
     <Compile Include="processNewData.php" />
     <Compile Include="new.php" />
@@ -28,6 +29,7 @@
     <Folder Include="js\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\generic\alignment.scss" />
     <Content Include="css\generic\buttons.scss" />
     <Content Include="css\generic\text.scss" />
     <Content Include="css\index.scss" />
