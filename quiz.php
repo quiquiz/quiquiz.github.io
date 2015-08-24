@@ -178,25 +178,11 @@
             ajaxURL += selections[i];
         }
 
-        $.ajax({
-            url: ajaxURL,
-            type: 'post',
-            success: function (data) {
-                console.log(data);
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                console.log(xhr);
-                console.log(textStatus);
-                console.log(errorThrown);
-            }
-        });
-
         //create a cookie for this user
         setCookie("quiquiz", URLcode, 1);
 
-        //refresh the page
-        location.reload();
-        return;
+        //go to processNewData.php
+        window.location.replace(ajaxURL);
     }
 
     ///////////////////////////////////////////

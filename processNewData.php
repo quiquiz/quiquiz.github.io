@@ -82,7 +82,9 @@ if( isset($_GET['qid']) && isset($_GET['res']) )
 
     if($errorstr == "")
     {
-    	echo "success";
+        //if there's no error, go back to quiz.php
+    	header("Location: quiz.php?qid=" . $URLcode);
+        exit;
     }
     else
     {
