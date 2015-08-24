@@ -30,6 +30,10 @@
             {
                 array_push($answersArray, $val);
             }
+            else
+            {
+                array_push($answersArray, " ");
+            }
         }
         else
         {
