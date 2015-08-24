@@ -10,7 +10,7 @@
             Quiquiz
         </h1>
 
-        <form method="post" action="new.php">
+        <form method="get" action="new.php">
             <input type="submit" class="button" name="submit" value="New Quiquiz" />
         </form>
     </div>

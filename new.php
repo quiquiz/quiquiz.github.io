@@ -94,6 +94,7 @@
 <html>
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/new.min.css">
     <title>New Quiquiz</title>
 </head>
 <body>
@@ -108,9 +109,11 @@
             <input type="text" name="ans3text" placeholder="Answer 3..." value=""/><br />
             <input type="text" name="ans4text" placeholder="Answer 4..." value=""/><br />
         </div><br /><br />
-        <button id="moreAnswersButton" name="more_answers" onclick="showAllAnswers()">More answer fields...</button>
+
+        <div class="doubleButtonContainer">
+        <button class="moreAnswersButton" name="more_answers" onclick="showAllAnswers()">More answer fields...</button>
         <input type="submit" class="button" name="submit" value="Finish" /><br />
-       
+       </div>
 
         <input type="checkbox" name="checkVSradio"/> <!-- using javascript, check this value and change the form input types to what is selected -->
         <span>Allow users to make multiple selections?</span>
