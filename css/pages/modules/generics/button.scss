@@ -1,0 +1,29 @@
+$transitionTime: 0.3s;
+$mainColor: #3BB3DB;
+
+button, .button
+{
+	height: 50px;
+	width: 120px;
+	border-radius: 0;
+	background-color: white;
+	border: solid 2px $mainColor;
+	color: $mainColor;
+	font-weight: bold;
+	font-size: 18px;
+	cursor: pointer;
+	margin-top: 10px;
+	margin-bottom: 10px;
+
+	-webkit-transition: background-color $transitionTime, color $transitionTime;
+	-moz-transition: background-color $transitionTime, color $transitionTime;
+	-o-transition: background-color $transitionTime, color $transitionTime;
+	transition: background-color $transitionTime, color $transitionTime;
+
+	&:hover
+	{
+		background-color: $mainColor;
+		color: white;
+	}
+
+}

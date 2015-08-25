@@ -1,0 +1,23 @@
+$transitionTime: 0.3s;
+$mainColor: #3BB3DB;
+
+input[type=text]
+{
+	margin: 3px;
+	width: 400px;
+	height: 40px;
+	font-size: 26px;
+	border: solid 2px #dddddd;
+
+	-webkit-transition: border $transitionTime;
+	-moz-transition: border $transitionTime;
+	-o-transition: border $transitionTime;
+	transition: border $transitionTime;
+
+	&:focus
+	{
+		outline: none;
+		border: solid 2px $mainColor;
+	}
+
+}

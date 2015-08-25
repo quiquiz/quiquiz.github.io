@@ -94,45 +94,50 @@
 <html>
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/new.min.css">
+    <link rel="stylesheet" type="text/css" href="css/pages/new.css">
     <title>New Quiquiz</title>
 </head>
 <body>
+    <div class="mainWrapper">
+        <div class="newWrapper">
 
-    <h1>New Quiquiz</h1>
+            <h1>New Quiquiz</h1>
 
-    <form id="newform" method="post" action="new.php">
-        <div class="textboxContainer">
-            <input id="question" type="text" name="question" placeholder="Question..." /><br>
-            <input type="text" name="ans1text" placeholder="Answer 1..." value=""/><br />
-            <input type="text" name="ans2text" placeholder="Answer 2..." value=""/><br />
-            <input type="text" name="ans3text" placeholder="Answer 3..." value=""/><br />
-            <input type="text" name="ans4text" placeholder="Answer 4..." value=""/><br />
-        </div><br /><br />
+            <form id="newform" method="post" action="new.php">
+                <div class="textboxContainer">
+                    <input id="question" type="text" name="question" placeholder="Question..." /><br /><br />
+                    <input type="text" name="ans1text" placeholder="Answer 1..." value=""/><br />
+                    <input type="text" name="ans2text" placeholder="Answer 2..." value=""/><br />
+                    <input type="text" name="ans3text" placeholder="Answer 3..." value=""/><br />
+                    <input type="text" name="ans4text" placeholder="Answer 4..." value=""/><br />
+                </div><br /><br />
 
-        <div class="doubleButtonContainer">
-        <button class="moreAnswersButton" name="more_answers" onclick="showAllAnswers()">More answer fields...</button>
-        <input type="submit" class="button" name="submit" value="Finish" /><br />
-       </div>
+                <div class="doubleButtonContainer">
+                <button type="button" class="moreAnswersButton" name="more_answers" onclick="showAllAnswers()">More...</button>
+                <input type="submit" class="button" name="submit" value="Finish" /><br />
+               </div>
 
-        <input type="checkbox" name="checkVSradio"/> <!-- using javascript, check this value and change the form input types to what is selected -->
-        <span>Allow users to make multiple selections?</span>
+                <input type="checkbox" name="checkVSradio"/> <!-- using javascript, check this value and change the form input types to what is selected -->
+                <span>Allow users to make multiple selections?</span>
 
-        <br />
+                <br />
 
-        <input type="checkbox" name="restrict_ip"/> <!-- using javascript, check this value and change the form input types to what is selected -->
-        <span>Allow multiple submissions from the same IP address?</span>
-    </form>
+                <input type="checkbox" name="restrict_ip"/> <!-- using javascript, check this value and change the form input types to what is selected -->
+                <span>Allow multiple submissions from the same IP address?</span>
+            </form>
 
-
+        </div>
+        <?php require('__footer.php'); ?>
+    </div>
     <script>
         function showAllAnswers()
         {
+            $(".newWrapper").css("height", "90%");
             $(".textboxContainer").append("<input type='text' name='ans5text' placeholder='Answer 5...' value=''/><br />");
             $(".textboxContainer").append("<input type='text' name='ans6text' placeholder='Answer 6...' value=''/><br />");
             $(".textboxContainer").append("<input type='text' name='ans7text' placeholder='Answer 7...' value=''/><br />");
             $(".textboxContainer").append("<input type='text' name='ans8text' placeholder='Answer 8...' value=''/><br />");
-            $("#moreAnswersButton").remove();
+            $(".moreAnswersButton").remove();
         }
     </script>
 </body>

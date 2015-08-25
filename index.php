@@ -2,17 +2,21 @@
 <html>
 <head>
     <title>Quiquiz</title>
-    <link rel="stylesheet" type="text/css" href="css/index.min.css">
+    <link rel="stylesheet" type="text/css" href="css/pages/index.css">
 </head>
 <body>
     <div class="mainWrapper">
-        <h1>
-            Quiquiz
-        </h1>
+        <div class="indexWrapper">
+            <h1>
+                Quiquiz
+            </h1>
 
-        <form method="get" action="new.php">
-            <input type="submit" class="button" name="submit" value="New Quiquiz" />
-        </form>
+            <form method="get" action="new.php">
+                <input type="submit" class="button" name="submit" value="New Quiquiz" />
+            </form>
+        </div>
+
+        <?php require('__footer.php'); ?>
     </div>
 </body>
 </html>
