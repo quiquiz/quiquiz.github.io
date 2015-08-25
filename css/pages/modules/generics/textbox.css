@@ -1,1 +1,1 @@
-input[type=text]{margin:3px;width:400px;height:40px;font-size:26px;border:solid 2px #dddddd;-webkit-transition:border 0.3s;-moz-transition:border 0.3s;-o-transition:border 0.3s;transition:border 0.3s}input[type=text]:focus{outline:none;border:solid 2px #3bb3db}
+input[type=text]{margin:3px;width:400px;height:40px;font-size:26px;border:solid 2px #dddddd;padding-left:10px;-webkit-transition:border 0.3s;-moz-transition:border 0.3s;-o-transition:border 0.3s;transition:border 0.3s}input[type=text]:focus{outline:none;border:solid 2px #3bb3db;font-weight:bold}
