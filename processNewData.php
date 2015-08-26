@@ -1,4 +1,5 @@
 <?php
+require("no_github/__connect_to_db.php");
 session_start();
 $errorstr = "";
 if( isset($_GET['qid']) && isset($_GET['res']) )
@@ -10,11 +11,8 @@ if( isset($_GET['qid']) && isset($_GET['res']) )
     $_SESSION['quizComplete'] = true;
 
     //create our new table entry 
-    $dbhost = "localhost";
-    $dbuser = "quiquiz_manager";
-    $dbpass = "quiquizletmein";
-    $dbname = "quiquiz";
-    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+
+    $conn = db_connect();
     
     if(mysqli_connect_errno())
     {

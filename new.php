@@ -1,8 +1,11 @@
 <?php
     require("error.php");
+    require("no_github/__connect_to_db.php");
+
     $errors = array();
     error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
     session_start(); //start session so I can use $_SESSION
+
     //function written by Stephen Watkins, obtained from:        www.stackoverflow.com/questions/4356289/php-random-string-generator
     function generateRandomString($length) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -57,14 +60,10 @@
     {
         //reset so that if they go to make ANOTHER new quiz, the session variable won't block them from doing so
         $_SESSION['created'] = false;
-        ///////////////////////////////////////////
-        //create our new table entry 
-        //connect
-        $dbhost = "localhost";
-        $dbuser = "quiquiz_manager";
-        $dbpass = "quiquizletmein";
-        $dbname = "quiquiz";
-        $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+
+        //connect to database
+        $conn = db_connect();
+
         //verify connect success
         if(!$conn){ reportError("Unable to establish a connection to the database.  Check with the administrator if this problem persists.", $errors); }
         else{

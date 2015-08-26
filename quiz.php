@@ -1,4 +1,6 @@
 <?php
+require("no_github/__connect_to_db.php");
+
     error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
     session_start();
 
@@ -11,7 +13,7 @@
     }
 
     //connect + verify
-    $conn = mysqli_connect("localhost", "quiquiz_manager", "quiquizletmein", "quiquiz");
+    $conn = db_connect();
     if(mysqli_connect_errno()){die("db conn failed: " . mysqli_connect_error() . "(" . mysqli_connect_errno() . ")");}
 
     $query  = "SELECT * FROM quizzes WHERE url_code = '{$URLcode}';";
