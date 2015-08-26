@@ -1,5 +1,5 @@
 <?php
-require("../no_github/__connect_to_db.php");
+require("no_github/__connect_to_db.php");
 session_start();
 $errorstr = "";
 if( isset($_GET['qid']) && isset($_GET['res']) )
