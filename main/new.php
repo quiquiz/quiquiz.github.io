@@ -1,6 +1,13 @@
 <?php
     require("error.php");
-    require("no_github/__connect_to_db.php");
+    if(file_exists("no_github/__connect_to_db.php"))
+    {
+        require("no_github/__connect_to_db.php");
+    }
+    else
+    {
+        require("../no_github/__connect_to_db.php");        
+    }
 
     $errors = array();
     error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);

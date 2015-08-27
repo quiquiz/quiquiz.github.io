@@ -1,5 +1,12 @@
 <?php
-require("no_github/__connect_to_db.php");
+if(file_exists("no_github/__connect_to_db.php"))
+{
+    require("no_github/__connect_to_db.php");
+}
+else
+{
+    require("../no_github/__connect_to_db.php");        
+}
 
     error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
     session_start();
@@ -79,27 +86,33 @@ require("no_github/__connect_to_db.php");
 <head>
     <title><?php echo $question; ?></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/pages/quiz.css">
 </head>
 <body>
-
-    <h3><?php echo $question; ?></h3><br/>
+<div class="mainWrapper">
+<div class="quizWrapper">
+    
 
     <div class="contentWrapper">
 
         <div class="quiz">
-        
-            <div <?php if($answerVisible[0] == 0){echo "class='deleteme'";} ?> ><input id="sel1" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="1"/> <?php if($answerVisible[0] == 1){echo $answers[0];} ?><br /></div>
-            <div <?php if($answerVisible[1] == 0){echo "class='deleteme'";} ?> ><input id="sel2" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="2"/> <?php if($answerVisible[1] == 1){echo $answers[1];} ?><br /></div>
-            <div <?php if($answerVisible[2] == 0){echo "class='deleteme'";} ?> ><input id="sel3" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="3"/> <?php if($answerVisible[2] == 1){echo $answers[2];} ?><br /></div>
-            <div <?php if($answerVisible[3] == 0){echo "class='deleteme'";} ?> ><input id="sel4" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="4"/> <?php if($answerVisible[3] == 1){echo $answers[3];} ?><br /></div>
-            <div <?php if($answerVisible[4] == 0){echo "class='deleteme'";} ?> ><input id="sel5" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="5"/> <?php if($answerVisible[4] == 1){echo $answers[4];} ?><br /></div>
-            <div <?php if($answerVisible[5] == 0){echo "class='deleteme'";} ?> ><input id="sel6" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="6"/> <?php if($answerVisible[5] == 1){echo $answers[5];} ?><br /></div>
-            <div <?php if($answerVisible[6] == 0){echo "class='deleteme'";} ?> ><input id="sel7" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="7"/> <?php if($answerVisible[6] == 1){echo $answers[6];} ?><br /></div>
-            <div <?php if($answerVisible[7] == 0){echo "class='deleteme'";} ?> ><input id="sel8" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="8"/> <?php if($answerVisible[7] == 1){echo $answers[7];} ?><br /></div>
+        <h2><?php echo $question; ?></h2><br/>
+            <div <?php if($answerVisible[1] == 0){echo "class='deleteme'";} ?> ><input id="sel2" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="2"/> <span><?php if($answerVisible[1] == 1){echo $answers[1];} ?></span><br /></div><br />
+            <div <?php if($answerVisible[0] == 0){echo "class='deleteme'";} ?> ><input id="sel1" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="1"/> <span><?php if($answerVisible[0] == 1){echo $answers[0];} ?></span><br /></div><br />
+            <div <?php if($answerVisible[2] == 0){echo "class='deleteme'";} ?> ><input id="sel3" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="3"/> <span><?php if($answerVisible[2] == 1){echo $answers[2];} ?></span><br /></div><br />
+            <div <?php if($answerVisible[3] == 0){echo "class='deleteme'";} ?> ><input id="sel4" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="4"/> <span><?php if($answerVisible[3] == 1){echo $answers[3];} ?></span><br /></div><br />
+            <div <?php if($answerVisible[4] == 0){echo "class='deleteme'";} ?> ><input id="sel5" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="5"/> <span><?php if($answerVisible[4] == 1){echo $answers[4];} ?></span><br /></div><br />
+            <div <?php if($answerVisible[5] == 0){echo "class='deleteme'";} ?> ><input id="sel6" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="6"/> <span><?php if($answerVisible[5] == 1){echo $answers[5];} ?></span><br /></div><br />
+            <div <?php if($answerVisible[6] == 0){echo "class='deleteme'";} ?> ><input id="sel7" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="7"/> <span><?php if($answerVisible[6] == 1){echo $answers[6];} ?></span><br /></div><br />
+            <div <?php if($answerVisible[7] == 0){echo "class='deleteme'";} ?> ><input id="sel8" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="8"/> <span><?php if($answerVisible[7] == 1){echo $answers[7];} ?></span><br /></div><br />
             <button class="submitQuizResults" onclick="processQuizResults()">Submit</button><br />
 
         </div>
     </div>   
+
+</div>
+</div>
+
 
 </body>
 </html>
