@@ -114,8 +114,8 @@ else
 
         <div class="quiz">
         <h2><?php echo $question; ?></h2><br/>
-            <div <?php if($answerVisible[1] == 0){echo "class='deleteme'";} ?> ><input id="sel2" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="2"/> <span><?php if($answerVisible[1] == 1){echo $answers[1];} ?></span><br /></div><br />
             <div <?php if($answerVisible[0] == 0){echo "class='deleteme'";} ?> ><input id="sel1" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="1"/> <span><?php if($answerVisible[0] == 1){echo $answers[0];} ?></span><br /></div><br />
+            <div <?php if($answerVisible[1] == 0){echo "class='deleteme'";} ?> ><input id="sel2" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="2"/> <span><?php if($answerVisible[1] == 1){echo $answers[1];} ?></span><br /></div><br />
             <div <?php if($answerVisible[2] == 0){echo "class='deleteme'";} ?> ><input id="sel3" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="3"/> <span><?php if($answerVisible[2] == 1){echo $answers[2];} ?></span><br /></div><br />
             <div <?php if($answerVisible[3] == 0){echo "class='deleteme'";} ?> ><input id="sel4" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="4"/> <span><?php if($answerVisible[3] == 1){echo $answers[3];} ?></span><br /></div><br />
             <div <?php if($answerVisible[4] == 0){echo "class='deleteme'";} ?> ><input id="sel5" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="5"/> <span><?php if($answerVisible[4] == 1){echo $answers[4];} ?></span><br /></div><br />
