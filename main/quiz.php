@@ -128,6 +128,7 @@ else
     </div>   
 
 </div>
+    <?php require('__footer.php'); ?>
 </div>
 
 
