@@ -1,10 +1,129 @@
 //font
 *
 {
-	font-family: 'Poiret One', cursive;
+  font-family: 'Poiret One', cursive;
 }
 @import url(https://fonts.googleapis.com/css?family=Poiret+One);
-
-@import url(modules/quiz_mod.css);
 @import url(modules/footer.css);
-@import url(modules/alignment.css);
+@import url(modules/quiz_mod.css);
+
+$mainColor: #3BB3DB;
+
+//////////////// quiz //////////////////////////
+.quizWrapper
+{
+
+  width: 100%;
+  text-align: center;
+  
+}
+
+.contentWrapper
+{
+  position: absolute;
+  top:0;
+  bottom: 100px;
+  left: 0;
+  right: 0;
+
+  margin: auto;
+
+  input[type=radio], input[type=checkbox]
+  {
+    float: left;
+    margin-top: 7px;
+    margin-right: 10px;
+  }
+
+  span
+  {
+    float: left;
+    font-size: 22px;
+  }
+
+  .quiz
+  {
+    display: inline-block;
+    margin-top: 8%;
+  }
+}
+
+/////////////////// results ////////////////////
+.resultsListItem
+{
+  margin-bottom: 15px;
+  border-radius: 3px;
+  padding: 5px;
+  list-style-type: none;
+  position: relative;
+
+  .answerDiv,
+  .resultDiv,
+  .histogramBar {
+    display: inline-block;
+    font-size: 20px;
+    vertical-align: top;
+  }
+  .answerDiv {
+    margin-right: 10px;
+    width: 200px;
+    word-wrap: break-word;
+  }
+  .histogramBar {
+    height: 6px;
+    width: 10px;
+    background-color: $mainColor;
+    margin-top: 9px;
+    border-radius: 5px;
+
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    -o-transition: all 1s;
+    transition: all 1s;
+
+    &:hover {
+      width: 250px;
+    }
+
+  }
+
+  &:nth-of-type(even) {
+    background-color: lighten($mainColor, 40%);
+  }
+
+}
+
+
+/*text*/
+h2 {
+  font-size: 40px;
+  color: black;
+  text-align: center;
+}
+
+
+/*alignment*/
+.results {
+  width: 600px;
+  height: 400px;
+  position: absolute;
+  top: 0;
+  bottom: 175px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  font-size: 0;
+
+  ul
+  {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.resultDiv {
+  text-align: right;
+  position: absolute;
+  right: 5px;
+  font-size: 20px;
+}

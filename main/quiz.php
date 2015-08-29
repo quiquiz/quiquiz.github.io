@@ -55,7 +55,24 @@ else
         {
             $answerVisible[$i] = 1;
         }
-    }    
+    }
+
+    $answersVisibleStr = "";
+    for($i = 0; $i < 8; $i++)
+    {
+        if($answerVisible[$i] == 0)
+        {
+            $answersVisibleStr .= "0";
+        }
+        else{
+            $answersVisibleStr .= "1";
+        }
+
+        if($i < 7)
+        {
+            $answersVisibleStr .= ",";
+        }
+    }
     
     //get user's ip address
     $userIpAddress = $_SERVER['REMOTE_ADDR'] ? $_SERVER['REMOTE_ADDR'] : '-1.-1.-1.-1';
@@ -124,29 +141,75 @@ else
 
     ///////////////////////////////////////////
     //  switchToResults()
-    function switchToResults()
+    function switchToResults(res, vis, ans, per)
     {
         //remove the quiz
         $(".quiz").remove();
-
-        //insert the results
-        $(".contentWrapper").append(
-              "<div class='results'>"
-                + "<h3>These are the results</h3>"
-                + "<ul style='list-style-type: none; margin:0;padding:0;'>"
-                    + "<li><div style='display: inline-block;' <?php if($answerVisible[0] == 0){echo "class='deleteme'";} ?> ></div> <div <?php if($answerVisible[0] == 1){echo "class='res0'";} ?>>&nbsp<?php if($answerVisible[0] == 1){echo $answers[0];} ?></div> </li>"
-                    + "<li><div style='display: inline-block;' <?php if($answerVisible[1] == 0){echo "class='deleteme'";} ?> ></div> <div <?php if($answerVisible[1] == 1){echo "class='res1'";} ?>>&nbsp<?php if($answerVisible[1] == 1){echo $answers[1];} ?></div> </li>"
-                    + "<li><div style='display: inline-block;' <?php if($answerVisible[2] == 0){echo "class='deleteme'";} ?> ></div> <div <?php if($answerVisible[2] == 1){echo "class='res2'";} ?>>&nbsp<?php if($answerVisible[2] == 1){echo $answers[2];} ?></div> </li>"
-                    + "<li><div style='display: inline-block;' <?php if($answerVisible[3] == 0){echo "class='deleteme'";} ?> ></div> <div <?php if($answerVisible[3] == 1){echo "class='res3'";} ?>>&nbsp<?php if($answerVisible[3] == 1){echo $answers[3];} ?></div> </li>"
-                    + "<li><div style='display: inline-block;' <?php if($answerVisible[4] == 0){echo "class='deleteme'";} ?> ></div> <div <?php if($answerVisible[4] == 1){echo "class='res4'";} ?>>&nbsp<?php if($answerVisible[4] == 1){echo $answers[4];} ?></div> </li>"
-                    + "<li><div style='display: inline-block;' <?php if($answerVisible[5] == 0){echo "class='deleteme'";} ?> ></div> <div <?php if($answerVisible[5] == 1){echo "class='res5'";} ?>>&nbsp<?php if($answerVisible[5] == 1){echo $answers[5];} ?></div> </li>"
-                    + "<li><div style='display: inline-block;' <?php if($answerVisible[6] == 0){echo "class='deleteme'";} ?> ></div> <div <?php if($answerVisible[6] == 1){echo "class='res6'";} ?>>&nbsp<?php if($answerVisible[6] == 1){echo $answers[6];} ?></div> </li>"
-                    + "<li><div style='display: inline-block;' <?php if($answerVisible[7] == 0){echo "class='deleteme'";} ?> ></div> <div <?php if($answerVisible[7] == 1){echo "class='res7'";} ?>>&nbsp<?php if($answerVisible[7] == 1){echo $answers[7];} ?></div> </li>"
-                + "</ul>"
-            + "</div>"
-        );
-
+        $(".quizWrapper").toggleClass("quizWrapper");
+        $(".contentWrapper").append("<div class='results'></div>");
+        $(".results").append("<h2><?php echo $question; ?></h2>");
         
+        html = "";
+        for (var i = 0; i < 8; i++)
+        {
+            var thisRes = "";
+            var thisAns = "";
+            var visible = true;
+
+            if (vis[i] == 1)
+            {
+                thisRes = res[i].toString();
+                thisAns = ans[i];
+            }
+            else
+            {
+                visible = false;
+            }
+
+            if (i == 0) { html += "<ul>"; }
+
+            if (visible) {
+                //start this list item
+                html += "<li class='resultsListItem'>";
+
+                //print the answer
+                html += "   <div class='answerDiv'>";
+                html += ans[i];
+                html += "   </div>";
+
+                //this bar gets modified by other code and changes width depending on the results
+                html += "   <div class='histogramBar'>";
+                html += "   </div>";
+
+                //print the results for this answer
+                html += "   <div class='resultDiv'>";
+                html += per[i].toFixed(1) + "%";
+                html += "&nbsp";
+                html += "(" + thisRes + ")";
+                html += "   </div>";
+
+                html += "</li>";
+            }
+
+            if (i == 7) { html += "</ul>"; }
+            
+        }
+        $(".results").append(html);
+
+        var numberOfValidAnswers = 0;
+        for (var i = 0; i < 8; i++)
+        {
+            numberOfValidAnswers += vis[i];
+        }
+        
+        for(var i = 0; i < numberOfValidAnswers; i ++)
+        {            
+            var thisEle = ".histogramBar:eq(" + i + ")";
+            var thisPercentage = parseInt(per[i]);
+            var thisWidth = 10 + (thisPercentage * 2.4);
+            var thisWidthStr = thisWidth.toString() + "px";
+            $(thisEle).width(thisWidthStr);
+        }        
     }
     
     ///////////////////////////////////////////
@@ -204,33 +267,18 @@ else
     //  DOCUMENT READY
     ///////////////////////////////////////////
     $(document).ready(function () {
-        $('div.deleteme').remove();        
+        $('div.deleteme').remove();
 
         //okay, now the page is loaded.  to the flow chart!
         var unique = "<?php echo $uniqueIp; ?>";
         var results = "<?php echo $currentResults; ?>";
-        var ipRestrict = '<?php echo $restrict; ?>';
-        var URLcode = '<?php echo $URLcode; ?>';
-
-        //if we have a repeat ip and we're supposed to prevent IP's from voting more than once, then display the results and delete the quiz
-        if(!unique)
-        {
-            if(ipRestrict == 'y')
-            {
-                switchToResults();
-            }
-            else //repeat ip, but no ip restrict
-            {
-                if(getCookie(URLcode))
-                {
-                    switchToResults();
-                }
-            }
-        }       
+        var ipRestrict = "<?php echo $restrict; ?>";
+        var URLcode = "<?php echo $URLcode; ?>";
+        var answersVisible = "<?php echo $answersVisibleStr ?>";
+        var answers = "<?php for($i=0;$i<8;$i++){if($answers[$i] != null){echo $answers[$i];}else{echo " ";} if($i<7){echo '|';} } ?>";
 
         var resultsArray = [];
-        for (var i = 0; i < 8; i++)
-        {
+        for (var i = 0; i < 8; i++) {
             var idx = results.indexOf(",");
             var tempstr = "";
             idx == -1 ? tempstr = results : tempstr = results.substr(0, idx);
@@ -238,13 +286,57 @@ else
             resultsArray.push(parseInt(tempstr));
         }
 
-        //now we should have an array of numbers.
-        //do any processing you want!  for now i'm just printing out the raw results
-        for(var i = 0; i < 8; i++)
+        //calculate and construct a percentage array
+        var percentagesArray = [];
+        var totalVotes = 0;
+        for (var i = 0; i < 8; i++)
         {
-            var classString = ".res" + i;
-            $(classString).prepend(resultsArray[i]);
+            totalVotes += resultsArray[i];
         }
+        for (var i = 0; i < 8; i++)
+        {
+            thisPercentage = (resultsArray[i] / totalVotes) * 100;
+            percentagesArray.push(thisPercentage);
+        }
+
+        var visibleArray = [];
+        for (var i = 0; i < 8; i++) {
+            var idx = answersVisible.indexOf(",");
+            var tempstr = "";
+            idx == -1 ? tempstr = answersVisible : tempstr = answersVisible.substr(0, idx);
+            answersVisible = answersVisible.substr(idx + 1);
+            visibleArray.push(parseInt(tempstr));
+        }
+
+        var answersArray = [];
+        for (var i = 0; i < 8; i++) {
+            var idx = answers.indexOf("|");
+            var tempstr = "";
+            idx == -1 ? tempstr = answers : tempstr = answers.substr(0, idx);
+            answers = answers.substr(idx + 1);
+            answersArray.push(tempstr);
+        }
+
+        //if we have a repeat ip and we're supposed to prevent IP's from voting more than once, then display the results and delete the quiz
+        if(!unique)
+        {
+            if(ipRestrict == 'y')
+            {
+                switchToResults(resultsArray, visibleArray, answersArray, percentagesArray);
+            }
+            else //repeat ip, but no ip restrict
+            {
+                if(getCookie(URLcode))
+                {
+                    switchToResults(resultsArray, visibleArray, answersArray, percentagesArray);
+                }
+            }
+        }
+
+        
+
+        
+
 
         
 

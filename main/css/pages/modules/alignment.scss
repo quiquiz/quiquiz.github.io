@@ -38,32 +38,4 @@ $transitionTime: 0.7s;
 
 }
 
-.quizWrapper
-{
-	position: absolute;
-	top:0;
-	bottom: 0;
-	left: 0;
-	right: 0;
 
-	margin: auto;
-
-	input[type=radio], input[type=checkbox]
-	{
-		float: left;
-		margin-top: 7px;
-		margin-right: 10px;
-	}
-
-	span
-	{
-		float: left;
-		font-size: 22px;
-	}
-
-	.quiz
-	{
-		display: inline-block;
-		margin-top: 8%;
-	}
-}
