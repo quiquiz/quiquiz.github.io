@@ -317,23 +317,23 @@ else
             answersArray.push(tempstr);
         }
 
-        //if we have a repeat ip and we're supposed to prevent IP's from voting more than once, then display the results and delete the quiz
-        if(!unique)
+        if (totalVotes > 0)
         {
-            if(ipRestrict == 'y')
-            {
-                switchToResults(resultsArray, visibleArray, answersArray, percentagesArray);
-            }
-            else //repeat ip, but no ip restrict
-            {
-                if(getCookie(URLcode))
-                {
+
+            //if we have a repeat ip and we're supposed to prevent IP's from voting more than once, then display the results and delete the quiz
+            if (!unique) {
+                if (ipRestrict == 'y') {
                     switchToResults(resultsArray, visibleArray, answersArray, percentagesArray);
                 }
+                else //repeat ip, but no ip restrict
+                {
+                    if (getCookie(URLcode)) {
+                        switchToResults(resultsArray, visibleArray, answersArray, percentagesArray);
+                    }
+                }
             }
-        }
 
-        
+        }
 
         
 
