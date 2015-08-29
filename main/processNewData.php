@@ -51,8 +51,15 @@ if( isset($_GET['qid']) && isset($_GET['res']) )
     for($i = 0; $i < 8; $i++)
     {
         $commaIdx = strpos($currentResults, ',');
-        array_push($currentResultsArr, intval(substr($currentResults, 0, $commaIdx)));
-        $currentResults = substr($currentResults, $commaIdx+1);
+        if($commaIdx != false)
+        {
+            array_push($currentResultsArr, intval(substr($currentResults, 0, $commaIdx)));
+            $currentResults = substr($currentResults, $commaIdx+1);
+        }
+        else
+        {
+            array_push($currentResultsArr, intval(substr($currentResults, 0)));
+        }
     }
 
     $quizResultsArr = array();
