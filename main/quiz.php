@@ -101,7 +101,7 @@ else
 <!DOCTYPE html>
 <html>
 <head>
-    <title><?php echo $question; ?></title>
+    <title><?php echo htmlspecialchars($question, ENT_QUOTES, 'UTF-8'); ?></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/pages/quiz.css">
 </head>
@@ -113,15 +113,15 @@ else
     <div class="contentWrapper">
 
         <div class="quiz">
-        <h2><?php echo $question; ?></h2><br/>
-            <div <?php if($answerVisible[0] == 0){echo "class='deleteme'";} ?> ><input id="sel1" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="1"/> <label for="sel1"><?php if($answerVisible[0] == 1){echo $answers[0];} ?></label><br /></div><br />
-            <div <?php if($answerVisible[1] == 0){echo "class='deleteme'";} ?> ><input id="sel2" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="2"/> <label for="sel2"><?php if($answerVisible[1] == 1){echo $answers[1];} ?></label><br /></div><br />
-            <div <?php if($answerVisible[2] == 0){echo "class='deleteme'";} ?> ><input id="sel3" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="3"/> <label for="sel3"><?php if($answerVisible[2] == 1){echo $answers[2];} ?></label><br /></div><br />
-            <div <?php if($answerVisible[3] == 0){echo "class='deleteme'";} ?> ><input id="sel4" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="4"/> <label for="sel4"><?php if($answerVisible[3] == 1){echo $answers[3];} ?></label><br /></div><br />
-            <div <?php if($answerVisible[4] == 0){echo "class='deleteme'";} ?> ><input id="sel5" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="5"/> <label for="sel5"><?php if($answerVisible[4] == 1){echo $answers[4];} ?></label><br /></div><br />
-            <div <?php if($answerVisible[5] == 0){echo "class='deleteme'";} ?> ><input id="sel6" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="6"/> <label for="sel6"><?php if($answerVisible[5] == 1){echo $answers[5];} ?></label><br /></div><br />
-            <div <?php if($answerVisible[6] == 0){echo "class='deleteme'";} ?> ><input id="sel7" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="7"/> <label for="sel7"><?php if($answerVisible[6] == 1){echo $answers[6];} ?></label><br /></div><br />
-            <div <?php if($answerVisible[7] == 0){echo "class='deleteme'";} ?> ><input id="sel8" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="8"/> <label for="sel8"><?php if($answerVisible[7] == 1){echo $answers[7];} ?></label><br /></div><br />
+        <h2><?php echo htmlspecialchars($question, ENT_QUOTES, 'UTF-8'); ?></h2><br/>
+            <div <?php if($answerVisible[0] == 0){echo "class='deleteme'";} ?> ><input id="sel1" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="1"/> <label for="sel1"><?php if($answerVisible[0] == 1){echo htmlspecialchars($answers[0], ENT_QUOTES, 'UTF-8');} ?></label><br /></div><br />
+            <div <?php if($answerVisible[1] == 0){echo "class='deleteme'";} ?> ><input id="sel2" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="2"/> <label for="sel2"><?php if($answerVisible[1] == 1){echo htmlspecialchars($answers[1], ENT_QUOTES, 'UTF-8');} ?></label><br /></div><br />
+            <div <?php if($answerVisible[2] == 0){echo "class='deleteme'";} ?> ><input id="sel3" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="3"/> <label for="sel3"><?php if($answerVisible[2] == 1){echo htmlspecialchars($answers[2], ENT_QUOTES, 'UTF-8');} ?></label><br /></div><br />
+            <div <?php if($answerVisible[3] == 0){echo "class='deleteme'";} ?> ><input id="sel4" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="4"/> <label for="sel4"><?php if($answerVisible[3] == 1){echo htmlspecialchars($answers[3], ENT_QUOTES, 'UTF-8');} ?></label><br /></div><br />
+            <div <?php if($answerVisible[4] == 0){echo "class='deleteme'";} ?> ><input id="sel5" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="5"/> <label for="sel5"><?php if($answerVisible[4] == 1){echo htmlspecialchars($answers[4], ENT_QUOTES, 'UTF-8');} ?></label><br /></div><br />
+            <div <?php if($answerVisible[5] == 0){echo "class='deleteme'";} ?> ><input id="sel6" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="6"/> <label for="sel6"><?php if($answerVisible[5] == 1){echo htmlspecialchars($answers[5], ENT_QUOTES, 'UTF-8');} ?></label><br /></div><br />
+            <div <?php if($answerVisible[6] == 0){echo "class='deleteme'";} ?> ><input id="sel7" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="7"/> <label for="sel7"><?php if($answerVisible[6] == 1){echo htmlspecialchars($answers[6], ENT_QUOTES, 'UTF-8');} ?></label><br /></div><br />
+            <div <?php if($answerVisible[7] == 0){echo "class='deleteme'";} ?> ><input id="sel8" type="<?php if($multiple == 'y'){echo 'checkbox';}else{echo 'radio';} ?>" name="tick" value="8"/> <label for="sel8"><?php if($answerVisible[7] == 1){echo htmlspecialchars($answers[7], ENT_QUOTES, 'UTF-8');} ?></label><br /></div><br />
             <button class="submitQuizResults" onclick="processQuizResults()">Submit</button><br />
 
         </div>
@@ -148,7 +148,7 @@ else
         $(".quiz").remove();
         $(".quizWrapper").toggleClass("quizWrapper");
         $(".contentWrapper").append("<div class='results'></div>");
-        $(".results").append("<h2><?php echo $question; ?></h2>");
+        $(".results").append("<h2><?php echo htmlspecialchars($question, ENT_QUOTES, 'UTF-8'); ?></h2>");
         
         html = "";
         for (var i = 0; i < 8; i++)
@@ -250,7 +250,7 @@ else
             $(thestr).is(':checked') ? selections.push(1) : selections.push(0);
         }
 
-        var URLcode = '<?php echo $URLcode; ?>';
+        var URLcode = '<?php echo htmlspecialchars($URLcode, ENT_QUOTES, 'UTF-8'); ?>';
         var ajaxURL = "processNewData.php?qid=" + URLcode + "&res=";
         for (var i = 0; i < 8; i++)
         {
@@ -264,19 +264,19 @@ else
         window.location.replace(ajaxURL);
     }
 
-    ///////////////////////////////////////////
+    ///////////////////////////////////////////, ENT_QUOTES, 'UTF-8')
     //  DOCUMENT READY
     ///////////////////////////////////////////
     $(document).ready(function () {
         $('div.deleteme').remove();
 
         //okay, now the page is loaded.  to the flow chart!
-        var unique = "<?php echo $uniqueIp; ?>";
-        var results = "<?php echo $currentResults; ?>";
-        var ipRestrict = "<?php echo $restrict; ?>";
-        var URLcode = "<?php echo $URLcode; ?>";
-        var answersVisible = "<?php echo $answersVisibleStr ?>";
-        var answers = "<?php for($i=0;$i<8;$i++){if($answers[$i] != null){echo $answers[$i];}else{echo " ";} if($i<7){echo '|';} } ?>";
+        var unique = "<?php echo htmlspecialchars($uniqueIp, ENT_QUOTES, 'UTF-8'); ?>";
+        var results = "<?php echo htmlspecialchars($currentResults, ENT_QUOTES, 'UTF-8'); ?>";
+        var ipRestrict = "<?php echo htmlspecialchars($restrict, ENT_QUOTES, 'UTF-8'); ?>";
+        var URLcode = "<?php echo htmlspecialchars($URLcode, ENT_QUOTES, 'UTF-8'); ?>";
+        var answersVisible = "<?php echo htmlspecialchars($answersVisibleStr, ENT_QUOTES, 'UTF-8') ?>";
+        var answers = "<?php for($i=0;$i<8;$i++){if($answers[$i] != null){echo htmlspecialchars($answers[$i], ENT_QUOTES, 'UTF-8'); }else{echo " ";} if($i<7){echo '|';} } ?>";
 
         var resultsArray = [];
         for (var i = 0; i < 8; i++) {

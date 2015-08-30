@@ -100,7 +100,7 @@ if( isset($_GET['qid']) && isset($_GET['res']) )
     }
     else
     {
-    	echo $errorstr;
+    	echo htmlspecialchars($errorstr, ENT_QUOTES, 'UTF-8');
     }
 }
 else
