@@ -107,15 +107,15 @@
     <div class="mainWrapper">
         <div class="newWrapper">
 
-            <h1>New Quiquiz</h1>
+            <h1>Quiquiz</h1>
 
             <form id="newform" method="post" action="new.php">
                 <div class="textboxContainer">
-                    <input id="question" type="text" name="question" placeholder="Question..." /><br /><br />
-                    <input type="text" name="ans1text" placeholder="Answer 1..." value=""/><br />
-                    <input type="text" name="ans2text" placeholder="Answer 2..." value=""/><br />
-                    <input type="text" name="ans3text" placeholder="Answer 3..." value=""/><br />
-                    <input type="text" name="ans4text" placeholder="Answer 4..." value=""/><br />
+                    <input id="question" type="text" name="question" placeholder="Question" /><br /><br />
+                    <input type="text" name="ans1text" placeholder="Answer" value=""/><br />
+                    <input type="text" name="ans2text" placeholder="Answer" value=""/><br />
+                    <input type="text" name="ans3text" placeholder="Answer" value=""/><br />
+                    <input type="text" name="ans4text" placeholder="Answer" value=""/><br />
                 </div><br /><br />
 
                 <div class="doubleButtonContainer">
@@ -139,10 +139,10 @@
         function showAllAnswers()
         {
             $(".newWrapper").css("height", "90%");
-            $(".textboxContainer").append("<input type='text' name='ans5text' placeholder='Answer 5...' value=''/><br />");
-            $(".textboxContainer").append("<input type='text' name='ans6text' placeholder='Answer 6...' value=''/><br />");
-            $(".textboxContainer").append("<input type='text' name='ans7text' placeholder='Answer 7...' value=''/><br />");
-            $(".textboxContainer").append("<input type='text' name='ans8text' placeholder='Answer 8...' value=''/><br />");
+            $(".textboxContainer").append("<input type='text' name='ans5text' placeholder='Answer' value=''/><br />");
+            $(".textboxContainer").append("<input type='text' name='ans6text' placeholder='Answer' value=''/><br />");
+            $(".textboxContainer").append("<input type='text' name='ans7text' placeholder='Answer' value=''/><br />");
+            $(".textboxContainer").append("<input type='text' name='ans8text' placeholder='Answer' value=''/><br />");
             $(".moreAnswersButton").remove();
         }
     </script>

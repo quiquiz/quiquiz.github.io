@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
     <title>Quiquiz</title>
@@ -16,7 +16,8 @@
             </form>
         </div>
 
-        <?php require('__footer.php'); ?>
+        <?php //require('__footer.php'); ?>
     </div>
 </body>
 </html>
+ -->
