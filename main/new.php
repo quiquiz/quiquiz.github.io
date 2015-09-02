@@ -123,13 +123,13 @@
                 <input type="submit" class="button" name="submit" value="Finish" /><br />
                </div>
 
-                <input type="checkbox" name="checkVSradio"/> <!-- using javascript, check this value and change the form input types to what is selected -->
-                <span>Allow users to make multiple selections?</span>
+                <input type="checkbox" name="checkVSradio" id="checkVSradio"/> <!-- using javascript, check this value and change the form input types to what is selected -->
+                <label style="cursor: pointer;" for="checkVSradio">Allow users to make multiple selections?</label>
 
                 <br />
 
-                <input type="checkbox" name="restrict_ip"/> <!-- using javascript, check this value and change the form input types to what is selected -->
-                <span>Allow multiple submissions from the same IP address?</span>
+                <input type="checkbox" name="restrict_ip" id="restrict_ip"/> <!-- using javascript, check this value and change the form input types to what is selected -->
+                <label style="cursor: pointer;" for="restrict_ip">Allow multiple submissions from the same IP address?</label>
             </form>
 
         </div>
