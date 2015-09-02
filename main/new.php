@@ -107,7 +107,8 @@
     <div class="mainWrapper">
         <div class="newWrapper">
 
-            <h1>Quiquiz</h1>
+            <!-- hardcoded styling until i remove / change the alpha tag -->
+            <h1 style="margin-left: 30px;">Quiquiz<sup><sup style="font-size: 14px; margin-left: 3px;">alpha</sup></sup></h1>
 
             <form id="newform" method="post" action="new.php">
                 <div class="textboxContainer">
