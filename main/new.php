@@ -121,7 +121,7 @@
 
                 <div class="doubleButtonContainer">
                 <button type="button" class="moreAnswersButton" name="more_answers" onclick="showAllAnswers()">More...</button>
-                <input type="submit" class="button" name="submit" value="Finish" /><br />
+                <input type="button" class="button" name="new_quiz" value="Finish" onclick="js_post()" /><br />
                </div>
 
                 <input type="checkbox" name="checkVSradio" id="checkVSradio"/> <!-- using javascript, check this value and change the form input types to what is selected -->
@@ -131,12 +131,37 @@
 
                 <input type="checkbox" name="restrict_ip" id="restrict_ip"/> <!-- using javascript, check this value and change the form input types to what is selected -->
                 <label style="cursor: pointer;" for="restrict_ip">Allow multiple submissions from the same IP address?</label>
+                <h1 id="errorWaitFiveMins">There is a five minute waiting period after making a quiz.  Try again in a few.</h1>
             </form>
 
         </div>
         <?php require('__footer.php'); ?>
     </div>
     <script>
+        ///////////////////////////////////////////
+        //  setCookie()
+        function setCookieFiveMinutes() {
+            var d = new Date();
+            d.setTime(d.getTime() + (5 * 60 * 1000));
+            var expires = "expires=" + d.toUTCString();
+            document.cookie = "postdelay" + "=" + "fiveminutes" + "; " + expires;
+        }
+
+        ///////////////////////////////////////////
+        //  getCookie()
+        function getCookie()
+        {
+            var cookielist = document.cookie;
+            if(cookielist.indexOf("postdelay") == -1)
+            {
+                return false; //cookie not found
+            }
+            else
+            {
+                return true; //cookie found
+            }
+    }
+
         function showAllAnswers()
         {
             $(".newWrapper").css("height", "90%");
@@ -145,6 +170,21 @@
             $(".textboxContainer").append("<input type='text' name='ans7text' placeholder='Answer' value=''/><br />");
             $(".textboxContainer").append("<input type='text' name='ans8text' placeholder='Answer' value=''/><br />");
             $(".moreAnswersButton").remove();
+        }
+
+        function js_post() {
+
+            //if a 10min cookie doesn't exist, create one and submit the form
+            if(!getCookie())
+            {
+                setCookieFiveMinutes();
+                document.getElementById('newform').submit();
+            }
+            else
+            {
+                $("#errorWaitFiveMins").css("opacity", "1");
+                setTimeout(function(){ $("#errorWaitFiveMins").css("opacity", "0"); }, 5000);
+            }            
         }
     </script>
 </body>

@@ -8,3 +8,16 @@
 @import url(modules/new_form.css);
 @import url(modules/footer.css);
 @import url(modules/alignment.css);
+
+
+#errorWaitFiveMins
+{
+	font-size: 18px;
+	color: red;
+	opacity: 0;
+
+	-webkit-transition: opacity 1s;
+	-moz-transition: opacity 1s;
+	-o-transition: opacity 1s;
+	transition: opacity 1s;
+}
